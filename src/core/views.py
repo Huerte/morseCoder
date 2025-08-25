@@ -6,7 +6,6 @@ from .morse import MORSE_CODE
 def home_page(request):
     return render(request, 'home.html')
 
-
 def text_translate(request):
     text = request.GET.get('text', '')
     encoded = []
@@ -19,4 +18,5 @@ def text_translate(request):
         if symbols:
             encoded.append(' '.join(symbols))
     encoded_code = ' / '.join(encoded)
+
     return JsonResponse({'encoded_code': encoded_code})
