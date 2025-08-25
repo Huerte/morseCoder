@@ -4,27 +4,43 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <section class="vh-100 mt-4">
-    <div class="container-fluid h-100">
-        <div class="row h-100">
-        <div class="col me-2 h-100 d-flex flex-column">
-            <label for="inputTextField" class="text-secondary fs-5 p-0 mb-3">Input your text here</label>
-            <textarea rows="20" class="form-control fw-bold" id="inputTextField"></textarea>
+    <section class="mt-4 mx-3">
+    <div class="container-fluid">
+        <div class="row g-4">
+        <div class="col-12 col-lg-6">
+            <div class="card card-dark h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span class="text-secondary-emphasis">Input</span>
+                    <span class="badge text-bg-secondary-subtle">Live</span>
+                </div>
+                <div class="card-body">
+                    <textarea rows="14" class="form-control form-control-dark fw-semibold" id="inputTextField" placeholder="Type any text to convert to Morse..."></textarea>
+                </div>
+            </div>
         </div>
 
-        <div class="col h-100 d-flex flex-column">
-            <label for="morseTranslationField" class="text-secondary fs-5 p-0 mb-3">Output</label>
-            <textarea rows="20" class="form-control  fw-bold" id="morseTranslationField" readonly></textarea>
-
-            <button class="btn btn-outline-success" id="playButton" onclick="playSound()">
-                Play Morse Code
-            </button>
+        <div class="col-12 col-lg-6">
+            <div class="card card-dark h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span class="text-secondary-emphasis">Output</span>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-success btn-sm" id="playButton" onclick="playSound()">
+                            <i class="bi bi-play-fill me-1"></i> Play
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm" id="copyButton" onclick="copyOutput()">
+                            <i class="bi bi-clipboard"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <textarea rows="14" class="form-control form-control-dark fw-semibold" id="morseTranslationField" readonly placeholder="Morse code will appear here..."></textarea>
+                </div>
+            </div>
         </div>
         </div>
     </div>
     </section>
 
-    
 <script>
     const inputArea = document.getElementById('inputTextField');
 
@@ -45,39 +61,23 @@
         }
     }
 
-    function sleep(milliseconds) {
-        return new Promise(resolve => setTimeout(resolve, milliseconds));
-    }
-
     async function playSound() {
         const playButton = document.getElementById('playButton');
         playButton.disabled = true;
-        playButton.textContent = 'Currently Playing...';
-
+        playButton.innerHTML = '<i class="bi bi-soundwave me-1"></i> Playing';
         const text = document.getElementById('morseTranslationField').value;
-        const dit = new Audio("{% static 'audio/dit.wav' %}");
-        const dah = new Audio("{% static 'audio/dah.wav' %}");
-        
-        for (const char of text) {
-            if (char === '.') {
-                dit.currentTime = 0;
-                dit.play();
-                await sleep(200);
-            } else if (char === '-') {
-                dah.currentTime = 0;
-                dah.play();
-                await sleep(400);
-            } else if (char === ' ') {
-                await sleep(400);
-            } else if (char === '/') {
-                await sleep(400);
-            }
-        }
-
+        await window.morseAudio.playMorse(text);
         playButton.disabled = false;
-        playButton.textContent = 'Play Morse Code';
-
+        playButton.innerHTML = '<i class="bi bi-play-fill me-1"></i> Play';
     }
 
+    async function copyOutput() {
+        const val = document.getElementById('morseTranslationField').value;
+        await navigator.clipboard.writeText(val);
+        const btn = document.getElementById('copyButton');
+        const original = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check2"></i>';
+        setTimeout(() => (btn.innerHTML = original), 1200);
+    }
 </script>
 {% endblock %}

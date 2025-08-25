@@ -1,0 +1,62 @@
+/* Dark theme variables */
+:root {
+  --bg-900: #0b0f17;
+  --bg-800: #111827;
+  --bg-700: #1f2937;
+  --fg-100: #e5e7eb;
+  --fg-200: #cbd5e1;
+  --accent: #6ee7b7;
+  --accent-2: #60a5fa;
+  --surface: #0f172a;
+  --border: #263244;
+}
+
+.bg-body { background: radial-gradient(1200px 800px at 10% 0%, #0e1525 0%, #0b0f17 45%, #0a0d14 100%); }
+.text-body { color: var(--fg-100); }
+
+.navbar-dark.bg-dark-gradient {
+  background: linear-gradient(180deg, rgba(20,24,33,0.9), rgba(16,20,29,0.9));
+  backdrop-filter: blur(6px);
+}
+
+.card-dark {
+  background: linear-gradient(180deg, rgba(18,22,31,0.92), rgba(14,18,26,0.92));
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+.form-control-dark {
+  background-color: var(--bg-800);
+  color: #f2f5ff;
+  border-color: var(--border);
+}
+.form-control-dark:focus {
+  background-color: var(--bg-700);
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 .2rem rgba(96,165,250,.15);
+  color: #f8fbff;
+}
+
+/* Improve text and placeholder visibility */
+.form-label { color: #e9eefb; font-weight: 600; }
+.form-control-dark::placeholder { color: #c8d1e1; opacity: .95; }
+textarea.form-control-dark { line-height: 1.4; }
+
+.btn-primary { background-color: var(--accent-2); border-color: var(--accent-2); }
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-success { background-color: var(--accent); border-color: var(--accent); color: #0b1220; }
+.btn-success:hover { filter: brightness(1.05); }
+.btn-outline-secondary { color: var(--fg-200); border-color: var(--border); }
+.btn-outline-secondary:hover { background: var(--bg-700); }
+
+.text-secondary-emphasis { color: var(--fg-200) !important; }
+.text-bg-secondary-subtle { background-color: rgba(148,163,184,0.18) !important; color: var(--fg-200) !important; }
+
+.badge { border: 1px solid var(--border); }
+
+/* Subtle animated accent ring */
+.card-dark:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.35), 0 0 0 1px rgba(96,165,250,0.2), 0 0 40px -20px rgba(96,165,250,0.6) inset; }
+
+/* Smaller tweaks */
+.container { max-width: 1140px; }
+
