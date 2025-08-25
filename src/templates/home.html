@@ -3,5 +3,41 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1>Homepage</h1>
+    <section class="vh-100 mt-4">
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+        <div class="col me-2 h-100 d-flex flex-column">
+            <label for="inputTextField" class="text-secondary fs-5 p-0 mb-3">Input your text here</label>
+            <textarea rows="20" class="form-control fw-bold" id="inputTextField"></textarea>
+        </div>
+
+        <div class="col h-100 d-flex flex-column">
+            <label for="morseTranslationField" class="text-secondary fs-5 p-0 mb-3">Output</label>
+            <textarea rows="20" class="form-control  fw-bold" id="morseTranslationField" readonly></textarea>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    
+<script>
+    const inputArea = document.getElementById('inputTextField');
+
+    inputArea.addEventListener('input', function() {
+        updateOutputField(inputArea.value);
+    })
+
+    async function updateOutputField(text) {
+        const outputArea = document.getElementById('morseTranslationField');
+        const url = `/text_translate/?text=${encodeURIComponent(text)}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            outputArea.value = data.encoded_code;
+        } catch (error) {
+            console.error('Error', error);
+        }
+    }
+</script>
 {% endblock %}
