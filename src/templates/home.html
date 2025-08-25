@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home{% endblock %}
 
@@ -14,6 +15,10 @@
         <div class="col h-100 d-flex flex-column">
             <label for="morseTranslationField" class="text-secondary fs-5 p-0 mb-3">Output</label>
             <textarea rows="20" class="form-control  fw-bold" id="morseTranslationField" readonly></textarea>
+
+            <button class="btn btn-outline-success" id="playButton" onclick="playSound()">
+                Play Morse Code
+            </button>
         </div>
         </div>
     </div>
@@ -39,5 +44,40 @@
             console.error('Error', error);
         }
     }
+
+    function sleep(milliseconds) {
+        return new Promise(resolve => setTimeout(resolve, milliseconds));
+    }
+
+    async function playSound() {
+        const playButton = document.getElementById('playButton');
+        playButton.disabled = true;
+        playButton.textContent = 'Currently Playing...';
+
+        const text = document.getElementById('morseTranslationField').value;
+        const dit = new Audio("{% static 'audio/dit.wav' %}");
+        const dah = new Audio("{% static 'audio/dah.wav' %}");
+        
+        for (const char of text) {
+            if (char === '.') {
+                dit.currentTime = 0;
+                dit.play();
+                await sleep(200);
+            } else if (char === '-') {
+                dah.currentTime = 0;
+                dah.play();
+                await sleep(400);
+            } else if (char === ' ') {
+                await sleep(400);
+            } else if (char === '/') {
+                await sleep(400);
+            }
+        }
+
+        playButton.disabled = false;
+        playButton.textContent = 'Play Morse Code';
+
+    }
+
 </script>
 {% endblock %}
