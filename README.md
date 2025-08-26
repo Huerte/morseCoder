@@ -50,7 +50,7 @@ A sleek, dark-themed Morse code encoder built with Django. Type text and see ins
 
 
 ### Homepage
-![Homepage](docs/screenshots/Screenshot(244).png)
+![Homepage](docs/screenshots/Screenshot(245).png)
 
 ---
 
