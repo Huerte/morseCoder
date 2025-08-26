@@ -8,8 +8,10 @@ SECRET_KEY =  config('SECRET_KEY')
 
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = []
-
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = ['https://morsecoder-qhxa.onrender.com/']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
