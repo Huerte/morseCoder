@@ -39,7 +39,7 @@
 
 /* Improve text and placeholder visibility */
 .form-label { color: #e9eefb; font-weight: 600; }
-.form-control-dark::placeholder { color: #c8d1e1; opacity: .95; }
+.form-control-dark::placeholder { color: #717171e0; opacity: .95; }
 textarea.form-control-dark { line-height: 1.4; }
 
 .btn-primary { background-color: var(--accent-2); border-color: var(--accent-2); }
