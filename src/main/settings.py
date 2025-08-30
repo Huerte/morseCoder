@@ -11,7 +11,7 @@ DEBUG = config('DEBUG', cast=bool)
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = ['https://morsecoder-qhxa.onrender.com/']
+    ALLOWED_HOSTS = ['morsecoder-qhxa.onrender.com/']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
